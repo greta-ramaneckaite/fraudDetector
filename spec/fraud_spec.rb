@@ -1,12 +1,12 @@
-require 'FraudDetector'
+RSpec.describe "Fraud" do
+  let(:postcode) { "S10 2FL"}
+  let(:card_number) {"1111"}
+  let(:card_expiry) {"06/2018"}
+  specify { expect(postcode).to exist }
 
-describe FraudDetector do 
-	context "test" do
-		it "gets the db" do
-			fraudDetector = FraudDetector.new
-
-			expect(@user).exist
-
-		end
-	end
+  
 end
+
+
+
+

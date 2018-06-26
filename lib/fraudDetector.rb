@@ -18,21 +18,21 @@ class FraudDetector
 
 		# Check postcode ( + manage spaces)
 		user_postcode = postcode.delete(' ')
-		if Address.where(postcode: user_postcode)
+		if @address.postcode.delete(' ') == user_postcode #and @user.address.delete(' ') == user_postcode
 			postcode_bool = true
 		end
 
 		# card_number check only last 4 digits
 		cn = cn.delete(' ')
 		cn = card_number[-4..-1]
-		if Credit_card.where(last_four_digits: cn)
+		if @credit_card.last_four_digits == cn #and @user.credit_card[-4..-1] == cn
 			card_number_bool = true
 		end
 
 		# card_expiry check correctly month and year match
 		card_expiry_date = card_expiry.split('/')
 		user_date = Date.new(card_expiry_date.first, card_expiry_date.last)
-		db_date = Date.new(Card_expiry.expiry_year, Card_expiry.expiry_month)
+		db_date = Date.new(@credit_card.expiry_year, @credit_card.expiry_month)
 
 		if user_date == db_date
 			card_expiry_bool = true
